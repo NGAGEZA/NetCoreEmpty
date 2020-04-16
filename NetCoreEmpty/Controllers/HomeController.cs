@@ -10,7 +10,7 @@ namespace NetCoreEmpty.Controllers
     {
         public IActionResult Index()
         {
-            ViewBag.Message = "This is my Project Empty";
+            ViewBag.Message = "This is My Project Empty";
             return View();
         }
     }
