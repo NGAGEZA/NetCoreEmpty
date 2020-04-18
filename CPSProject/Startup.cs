@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CPSProject.Models.db;
 
 
 namespace CPSProject
@@ -22,6 +24,9 @@ namespace CPSProject
         {
             services.AddMvc();
             string constr = Configuration.GetConnectionString("CONDBSHT");
+
+            //Entity Framework  
+            services.AddDbContext<ShipPacking>(options => options.UseSqlServer(constr));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

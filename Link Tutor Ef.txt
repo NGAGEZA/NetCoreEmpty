@@ -1,0 +1,1 @@
+https://www.c-sharpcorner.com/article/entity-framework-database-first-in-asp-net-core2/
