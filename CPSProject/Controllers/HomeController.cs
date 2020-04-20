@@ -26,13 +26,13 @@ namespace CPSProject.Controllers
 
        
         [HttpPost]
-        public IActionResult Searchlot(DateTime dtfrom)
+        public IActionResult SearchResult(DateTime dtfrom)
         {
             //if (DateTime.(lotno))
             //{
             //    return RedirectToAction("Index");
             //}
-            var shipinglst = _dbContext.V_SHIP_BLUE_BOX_WITH_INCMG.Where(x => x.Date1 == dtfrom).ToListNoLock();
+            var shipinglst = _dbContext.V_SHIP_BLUE_BOX_WITH_INCMG.Where(x => x.Date1 == dtfrom).OrderBy(o => o.Date1).ThenBy(o => o.Time1).ToListNoLock();
 
             if (shipinglst.Count != 0)
             {
