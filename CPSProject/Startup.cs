@@ -26,20 +26,43 @@ namespace CPSProject
             string constr = Configuration.GetConnectionString("CONDBSHT");
 
             //Entity Framework  
-            services.AddDbContext<ShipPacking>(options => options.UseSqlServer(constr));
+            services.AddDbContext<ShipPackingContext>(options => options.UseSqlServer(constr));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        //public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        //{
+        //    if (env.IsDevelopment())
+        //    {
+        //        app.UseDeveloperExceptionPage();
+        //    }
+
+        //    app.Run(async (context) =>
+        //    {
+        //        await context.Response.WriteAsync("Hello World!");
+        //    });
+        //}
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.  
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //app.UseBrowserLink();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
             }
 
-            app.Run(async (context) =>
+            app.UseStaticFiles();
+            app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

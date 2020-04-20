@@ -10,26 +10,42 @@ namespace CPSProject.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ShipPacking _dbContext;
-        public HomeController(ShipPacking dbContext)
+        private readonly ShipPackingContext _dbContext;
+        public HomeController(ShipPackingContext dbContext)
         {
             _dbContext = dbContext;
         }
-
         public IActionResult Index()
         {
-            var _emplst = _dbContext.
-                Join(_dbContext.tblSkills, e => e.SkillID, s => s.SkillID,
-                    (e, s) => new EmployeeViewModel
-                    {
-                        EmployeeID = e.EmployeeID,
-                        EmployeeName = e.EmployeeName,
-                        PhoneNumber = e.PhoneNumber,
-                        Skill = s.Title,
-                        YearsExperience = e.YearsExperience
-                    }).ToList();
-            IList<EmployeeViewModel> emplst = _emplst;
-            return View(emplst);
+           // var shipinglst = _dbContext.V_SHIP_BLUE_BOX_WITH_INCMG.Where(x => x.LotNo == "2012A2249V").ToListNoLock();
+
+            return View();
+           
+        }
+
+
+       
+        [HttpPost]
+        public IActionResult Searchlot(DateTime dtfrom)
+        {
+            //if (DateTime.(lotno))
+            //{
+            //    return RedirectToAction("Index");
+            //}
+            var shipinglst = _dbContext.V_SHIP_BLUE_BOX_WITH_INCMG.Where(x => x.Date1 == dtfrom).ToListNoLock();
+
+            if (shipinglst.Count != 0)
+            {
+                return View(shipinglst);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+
+            
+            //ViewBag.Name = string.Format("Name: {0} {1}", firstName, lastName);
+            //return View();
         }
     }
 }

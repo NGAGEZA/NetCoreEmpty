@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Shipping Packing - LSI</h1>
+<body>
+    <form method="post" enctype="multipart/form-data" asp-controller="Home">
+        <table>
+            <tr>
+                <td>Date From: </td>
+                <td><input type="text" id="txtLotno" name="dtfrom" /></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit" formaction="@Url.Action("Searchlot")" /></td>
+            </tr>
+        </table>
+        <hr />
+
+    </form>
+ 
+    
+</body>
+
+
